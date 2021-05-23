@@ -1,0 +1,25 @@
+{
+  "name": "nextjs",
+  "version": "4.0.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@reduxjs/toolkit": "^1.5.1",
+    "clsx": "latest",
+    "framer-motion": "^4.1.17",
+    "next": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-icons": "^4.2.0",
+    "react-redux": "^7.2.4",
+    "react-typed": "^1.2.0",
+    "react-useanimations": "^2.0.6"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+  }
+}
