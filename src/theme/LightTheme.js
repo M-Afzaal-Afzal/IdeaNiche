@@ -30,6 +30,9 @@ const lightTheme = createMuiTheme({
     h2: {
       fontSize: '36px',
       lineHeight: '1.4'
+    },
+    h3:{
+      fontSize: "1.15rem",
     }
   }
 });

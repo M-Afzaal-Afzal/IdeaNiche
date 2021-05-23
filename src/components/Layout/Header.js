@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
      marginRight: '15px',
     },
     drawer: {
-        position: 'absolute',
+        position: 'fixed',
         width: '100%',
         minHeight: '100vh',
         background: 'white',
@@ -89,6 +89,12 @@ const useStyles = makeStyles(theme => ({
     },
     drawerIcon: {
         margin: '0 2rem',
+        [theme.breakpoints.down('xs')]: {
+            margin: '0 1rem',
+        }
+    },
+    boxShadow: {
+        boxShadow: "rgb(196 196 196 / 22%) 0px 24px 24px",
     }
 
 }))
@@ -115,22 +121,6 @@ const drawerVariants = {
     }
 }
 
-function ElevationScroll(props) {
-    const {children, window} = props;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0,
-        target: window ? window() : undefined,
-    });
-
-    return React.cloneElement(children, {
-        elevation: trigger ? 16 : 0,
-    });
-}
-
 const Header = (props) => {
 
     const classes = useStyles();
@@ -151,10 +141,10 @@ const Header = (props) => {
     }
 
     return (
-        <ElevationScroll {...props}>
+
             <Box>
 
-            <AppBar color={'white'} elevation={isDrawerOpen ? 0 : 5} position={'fixed'}>
+            <AppBar color={'white'} elevation={0} className={!isDrawerOpen ? classes.boxShadow : ' '} position={'fixed'}>
                 <Container maxWidth={'lg'} style={{position: 'relative'}}>
                     <Toolbar color={'gray'} disableGutters >
 
@@ -320,7 +310,6 @@ const Header = (props) => {
 
                 </AnimatePresence>
             </Box>
-        </ElevationScroll>
     );
 };
 
