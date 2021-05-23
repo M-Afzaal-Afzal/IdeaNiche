@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const OutLineButton = ({children,size,color,...props}) => {
+const OutLineButton = ({children,size,color,bottomLineColor,...props}) => {
 
     const classes = useStyles();
 
@@ -87,6 +87,7 @@ const OutLineButton = ({children,size,color,...props}) => {
             {children}
         <AnimatePresence>
             <motion.div
+                style={{background: bottomLineColor}}
                  variants={bottomLineVariants}
                  initial={'hidden'}
                  exit={'exit'}

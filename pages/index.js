@@ -3,6 +3,7 @@ import {Box} from "@material-ui/core";
 import HeroSection from "../src/components/landingPage/HeroSection";
 import AboutUsSection from "../src/components/landingPage/AboutUsSection";
 import DevelopmentServices from "../src/components/landingPage/DevelopmentServices";
+import PortfolioSection from "../src/components/landingPage/PortfolioSection";
 
 export default function Index() {
   return (
@@ -10,6 +11,7 @@ export default function Index() {
         <HeroSection/>
           <AboutUsSection/>
           <DevelopmentServices/>
+          <PortfolioSection/>
       </Box>
   );
 }

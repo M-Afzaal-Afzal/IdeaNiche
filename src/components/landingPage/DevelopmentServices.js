@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     titleWithLineContainer: {
         display: 'flex',
         justifyContent: 'flex-end',
-        padding: '80px 0',
+        padding: '60px 0',
         [theme.breakpoints.down('sm')]: {
             justifyContent: 'flex-start',
             marginLeft: 0,
@@ -76,9 +76,13 @@ const useStyles = makeStyles(theme => ({
     mainTechnologies: {
         display: 'flex',
         justifyContent: 'center',
+        paddingBottom: '160px',
         [theme.breakpoints.down('sm')]: {
             justifyContent: 'start',
             flexDirection: 'column',
+        },
+        [theme.breakpoints.down('xs')]: {
+            paddingBottom: '80px',
         }
     },
     technologyBox: {
@@ -140,6 +144,8 @@ const DevelopmentServices = () => {
                 </Box>
 
                 {/*    title with line*/}
+
+
                 <Box className={classes.titleWithLineContainer}>
                     <HeadingWithDash className={classes.headingWithDash} style={{marginLeft: 'auto'}}>
                         We excel at quality app development
@@ -147,6 +153,7 @@ const DevelopmentServices = () => {
                 </Box>
 
                 <Box className={classes.mainTechnologies}>
+
                     <Box className={classes.technologyBox}>
                         <Typography className={classes.techBoxHeading} variant={'h3'}>
                             Web technologies
