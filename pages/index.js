@@ -5,6 +5,8 @@ import AboutUsSection from "../src/components/landingPage/AboutUsSection";
 import DevelopmentServices from "../src/components/landingPage/DevelopmentServices";
 import PortfolioSection from "../src/components/landingPage/PortfolioSection";
 import Testimonials from "../src/components/landingPage/Testimonials";
+import AwwardsSection from "../src/components/landingPage/AwwardsSection";
+import ContactusSection from "../src/components/landingPage/ContactusSection";
 
 export default function Index() {
   return (
@@ -14,6 +16,8 @@ export default function Index() {
           <DevelopmentServices/>
           <PortfolioSection/>
           <Testimonials/>
+          <AwwardsSection/>
+          <ContactusSection/>
       </Box>
   );
 }
