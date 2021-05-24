@@ -3,7 +3,7 @@ import {
     AppBar,
     Box,
     Container,
-    Hidden,
+    Hidden, IconButton,
     makeStyles,
     Toolbar, useTheme
 } from "@material-ui/core";
@@ -15,9 +15,9 @@ import {
 import Link from '../../utils/Link';
 import OutLineButton from "../buttons/OutLineButton";
 import RoundedButton from "../buttons/RoundedButton";
-import UseAnimations from "react-useanimations";
-import menu4 from 'react-useanimations/lib/menu4'
+
 import {FaFacebookF, FaLinkedinIn, FaInstagram, FaDribbble, FaBehance} from "react-icons/fa";
+import {HiOutlineMenuAlt3} from "react-icons/hi";
 import {AnimatePresence, motion} from "framer-motion";
 
 const useStyles = makeStyles(theme => ({
@@ -135,9 +135,9 @@ const Header = (props) => {
     //     dispatch(toggleDarkMode());
     // }
 
-    const toggleDrawer = () => {
-        setIsDrawerOpen(!isDrawerOpen);
-    }
+    // const toggleDrawer = () => {
+    //     setIsDrawerOpen(!isDrawerOpen);
+    // }
 
     const closeDrawer = () => {
         setIsDrawerOpen(false)
@@ -203,10 +203,10 @@ const Header = (props) => {
                                 </OutLineButton>
 
                                 <Box component={Link} href={'/contact'}>
-                                    <Box onClick={toggleDrawer}>
-                                    <RoundedButton className={classes.btn}>
-                                        Contact us
-                                    </RoundedButton>
+                                    <Box>
+                                        <RoundedButton className={classes.btn}>
+                                            Contact us
+                                        </RoundedButton>
                                     </Box>
                                 </Box>
 
@@ -224,14 +224,27 @@ const Header = (props) => {
                                     Get a quote
                                 </OutLineButton>
                                 <div>
-                                    <UseAnimations
-                                        animation={menu4}
-                                        animationKey="menu4"
-                                        onClick={toggleDrawer}
-                                        size={35}
-                                        reverse={isDrawerOpen}
-                                        style={{padding: 100}}
-                                    />
+
+                                    {
+                                        !isDrawerOpen ? (
+                                            <IconButton onClick={openDrawer} className={classes.navigationIcon}>
+                                                <HiOutlineMenuAlt3 size={30}/>
+                                            </IconButton>
+                                        ) : (
+                                            <IconButton onClick={closeDrawer} className={classes.navigationIcon}>
+                                                <HiOutlineMenuAlt3 size={30}/>
+                                            </IconButton>
+                                        )
+                                    }
+
+                                    {/*    <UseAnimations*/}
+                                    {/*        animation={menu4}*/}
+                                    {/*        animationKey="menu4"*/}
+                                    {/*        onClick={toggleDrawer}*/}
+                                    {/*        size={35}*/}
+                                    {/*        reverse={isDrawerOpen}*/}
+                                    {/*        style={{padding: 100}}*/}
+                                    {/*    />*/}
 
                                 </div>
                                 {/*</IconButton>*/}
@@ -288,10 +301,10 @@ const Header = (props) => {
                                 </OutLineButton>
 
                                 <Box component={Link} href={'/contact'}>
-                                    <Box onClick={toggleDrawer}>
-                                <RoundedButton size={'24px'} color={''} className={classes.drawerButton}>
-                                    Contact us
-                                </RoundedButton>
+                                    <Box onClick={closeDrawer}>
+                                        <RoundedButton size={'24px'} color={''} className={classes.drawerButton}>
+                                            Contact us
+                                        </RoundedButton>
                                     </Box>
                                 </Box>
                             </Box>
