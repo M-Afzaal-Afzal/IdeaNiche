@@ -197,7 +197,13 @@ const ContactusSection = () => {
                                     name="email"
                                     control={control}
                                     defaultValue=""
-                                    rules={{required: {value: true,message: 'You must have to specify email'},pattern: /^\S+@\S+$/i}}
+                                    rules={{
+                                        required: {value: true,message: 'You must have to specify email'},
+                                        pattern: {
+                                            value: /^\S+@\S+$/i,
+                                            message: 'Please enter a valid email address',
+                                        }
+                                    }}
                                     render={({field}) => (
                                         <TextField
                                             InputProps={{

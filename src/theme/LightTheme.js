@@ -3,6 +3,18 @@ import { red } from '@material-ui/core/colors';
 
 // Create a lightTheme instance.
 const lightTheme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        html: {
+          WebkitFontSmoothing: 'auto',
+        },
+        body: {
+          color: '#000',
+        }
+      },
+    },
+  },
   palette: {
     primary: {
       main: '#F81D3D',
@@ -21,6 +33,7 @@ const lightTheme = createMuiTheme({
     },
   },
   typography: {
+    color: '#000',
     fontFamily: 'Montserrat, sans-serif',
     h1: {
       fontSize: '80px',
