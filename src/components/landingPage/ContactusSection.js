@@ -58,6 +58,9 @@ const useStyles = makeStyles(theme => ({
         color: '#fff',
         fontSize: '68px',
         lineHeight: '81px',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '40px',
+        }
     },
     singleInput: {
         width: '231px',

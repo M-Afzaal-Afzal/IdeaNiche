@@ -13,12 +13,11 @@ import {
 // import {Link} from 'react-scroll'
 
 import Link from '../../utils/Link';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import OutLineButton from "../buttons/OutLineButton";
 import RoundedButton from "../buttons/RoundedButton";
 import UseAnimations from "react-useanimations";
 import menu4 from 'react-useanimations/lib/menu4'
-import { FaFacebookF,FaLinkedinIn,FaInstagram,FaDribbble,FaBehance } from "react-icons/fa";
+import {FaFacebookF, FaLinkedinIn, FaInstagram, FaDribbble, FaBehance} from "react-icons/fa";
 import {AnimatePresence, motion} from "framer-motion";
 
 const useStyles = makeStyles(theme => ({
@@ -62,7 +61,7 @@ const useStyles = makeStyles(theme => ({
         margin: '0 .7rem',
     },
     getAQuote: {
-     marginRight: '15px',
+        marginRight: '15px',
     },
     drawer: {
         position: 'fixed',
@@ -140,21 +139,30 @@ const Header = (props) => {
         setIsDrawerOpen(!isDrawerOpen);
     }
 
+    const closeDrawer = () => {
+        setIsDrawerOpen(false)
+    }
+
+    const openDrawer = () => {
+        setIsDrawerOpen(true);
+    }
+
     return (
 
-            <Box>
+        <Box>
 
-            <AppBar color={'white'} elevation={0} className={!isDrawerOpen ? classes.boxShadow : ' '} position={'fixed'}>
+            <AppBar color={'white'} elevation={0} className={!isDrawerOpen ? classes.boxShadow : ' '}
+                    position={'fixed'}>
                 <Container maxWidth={'lg'} style={{position: 'relative'}}>
-                    <Toolbar color={'gray'} disableGutters >
+                    <Toolbar color={'gray'} disableGutters>
 
                         {/* Left Icons*/}
 
                         <Box className={`${classes.grow} ${classes.leftIconsContainer}`}>
 
                             {/*<Hidden mdUp>*/}
-                            <Box className={classes.logoLink}>
-                                <Box component={Link}  href={'/'}
+                            <Box className={classes.logoLink} onClick={closeDrawer}>
+                                <Box component={Link} href={'/'}
                                      style={{textDecoration: 'none'}}
                                      className={classes.headerButton} size={'large'}>
                                     IdeaNiche
@@ -168,12 +176,12 @@ const Header = (props) => {
                         <Box className={`${classes.grow} ${classes.rightIconsContainer}`}>
                             <Hidden smDown>
 
-                                    <OutLineButton className={classes.btn}
-                                                   to={'contact'} smooth={'true'}
-                                                   size={'small'}
-                                    >
-                                        Services
-                                    </OutLineButton>
+                                <OutLineButton className={classes.btn}
+                                               to={'contact'} smooth={'true'}
+                                               size={'small'}
+                                >
+                                    Services
+                                </OutLineButton>
 
 
                                 <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
@@ -194,9 +202,13 @@ const Header = (props) => {
                                     Blog
                                 </OutLineButton>
 
-                                <RoundedButton className={classes.btn}>
-                                    Contact us
-                                </RoundedButton>
+                                <Box component={Link} href={'/contact'}>
+                                    <Box onClick={toggleDrawer}>
+                                    <RoundedButton className={classes.btn}>
+                                        Contact us
+                                    </RoundedButton>
+                                    </Box>
+                                </Box>
 
                             </Hidden>
 
@@ -211,17 +223,17 @@ const Header = (props) => {
                                 >
                                     Get a quote
                                 </OutLineButton>
-                                    <div>
-                                        <UseAnimations
-                                            animation={menu4}
-                                            animationKey="menu4"
-                                            onClick={toggleDrawer}
-                                            size={35}
-                                            reverse={isDrawerOpen}
-                                            style={{ padding: 100 }}
-                                        />
+                                <div>
+                                    <UseAnimations
+                                        animation={menu4}
+                                        animationKey="menu4"
+                                        onClick={toggleDrawer}
+                                        size={35}
+                                        reverse={isDrawerOpen}
+                                        style={{padding: 100}}
+                                    />
 
-                                    </div>
+                                </div>
                                 {/*</IconButton>*/}
                             </Hidden>
 
@@ -230,86 +242,90 @@ const Header = (props) => {
                     </Toolbar>
                 </Container>
             </AppBar>
-                {/* drawer*/}
-                <AnimatePresence>
+            {/* drawer*/}
+            <AnimatePresence>
 
-                    {
-                        isDrawerOpen ? (
-                            <Box
-                                component={motion.div}
-                                variants={drawerVariants}
-                                initial={'hidden'}
-                                animate={'visible'}
-                                exit={'exit'}
-                                className={classes.drawer}>
-                                <Box className={classes.drawerButtonsContainer}>
-                                    <OutLineButton
-                                        className={classes.drawerButton}
-                                        size={'24px'}
-                                        color={theme.palette.primary.main}
-                                    >
-                                        Services
-                                    </OutLineButton>
+                {
+                    isDrawerOpen ? (
+                        <Box
+                            component={motion.div}
+                            variants={drawerVariants}
+                            initial={'hidden'}
+                            animate={'visible'}
+                            exit={'exit'}
+                            className={classes.drawer}>
+                            <Box className={classes.drawerButtonsContainer}>
+                                <OutLineButton
+                                    className={classes.drawerButton}
+                                    size={'24px'}
+                                    color={theme.palette.primary.main}
+                                >
+                                    Services
+                                </OutLineButton>
 
-                                    <OutLineButton
-                                        className={classes.drawerButton}
-                                        size={'24px'}
-                                        color={theme.palette.primary.main}
-                                    >
-                                        About
-                                    </OutLineButton>
+                                <OutLineButton
+                                    className={classes.drawerButton}
+                                    size={'24px'}
+                                    color={theme.palette.primary.main}
+                                >
+                                    About
+                                </OutLineButton>
 
-                                    <OutLineButton
-                                        className={classes.drawerButton}
-                                        size={'24px'}
-                                        color={theme.palette.primary.main}
-                                    >
-                                        Work
-                                    </OutLineButton>
+                                <OutLineButton
+                                    className={classes.drawerButton}
+                                    size={'24px'}
+                                    color={theme.palette.primary.main}
+                                >
+                                    Work
+                                </OutLineButton>
 
-                                    <OutLineButton
-                                        className={classes.drawerButton}
-                                        size={'24px'}
-                                        color={theme.palette.primary.main}
-                                    >
-                                        Blog
-                                    </OutLineButton>
+                                <OutLineButton
+                                    className={classes.drawerButton}
+                                    size={'24px'}
+                                    color={theme.palette.primary.main}
+                                >
+                                    Blog
+                                </OutLineButton>
 
-                                    <RoundedButton size={'24px'} color={''} className={classes.drawerButton}>
-                                        Contact us
-                                    </RoundedButton>
+                                <Box component={Link} href={'/contact'}>
+                                    <Box onClick={toggleDrawer}>
+                                <RoundedButton size={'24px'} color={''} className={classes.drawerButton}>
+                                    Contact us
+                                </RoundedButton>
+                                    </Box>
+                                </Box>
+                            </Box>
+
+                            <Box className={classes.drawerIconsContainer}>
+                                <Box className={classes.drawerIcon}>
+                                    <FaLinkedinIn size={20}/>
                                 </Box>
 
-                                <Box className={classes.drawerIconsContainer}>
-                                    <Box className={classes.drawerIcon}>
-                                        <FaLinkedinIn size={20}/>
-                                    </Box>
+                                <Box className={classes.drawerIcon}>
+                                    <FaInstagram size={20}/>
+                                </Box>
 
-                                    <Box className={classes.drawerIcon}>
-                                        <FaInstagram size={20}/>
-                                    </Box>
+                                <Box className={classes.drawerIcon}>
+                                    <FaFacebookF size={20}/>
+                                </Box>
 
-                                    <Box className={classes.drawerIcon}>
-                                        <FaFacebookF size={20}/>
-                                    </Box>
+                                <Box className={classes.drawerIcon}>
+                                    <FaBehance size={20}/>
+                                </Box>
 
-                                    <Box className={classes.drawerIcon}>
-                                        <FaBehance size={20}/>
-                                    </Box>
-
-                                    <Box className={classes.drawerIcon}>
-                                        <FaDribbble size={20}/>
-                                    </Box>
-
+                                <Box className={classes.drawerIcon}>
+                                    <FaDribbble size={20}/>
                                 </Box>
 
                             </Box>
-                        ) : null
-                    }
+
+                        </Box>
+                    ) : null
+                }
 
 
-                </AnimatePresence>
-            </Box>
+            </AnimatePresence>
+        </Box>
     );
 };
 

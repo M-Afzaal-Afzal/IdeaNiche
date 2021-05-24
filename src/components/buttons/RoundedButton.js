@@ -9,12 +9,15 @@ const useStyles = makeStyles(theme => ({
         textDecoration: "none",
         color: theme.palette.primary.main,
         cursor: 'pointer',
-        display: 'inline-block',
+        display: 'inline-flex',
+        justifyContent: 'center',
+        alignItems:'center',
         fontFamily: 'Montserrat, sans-serif',
         overflow: 'hidden',
         borderRadius: '16px',
         padding: '4px 1.15rem',
         border: `1px solid ${theme.palette.primary.main}`,
+
         transition: 'all .4s',
         '&:hover': {
             background: theme.palette.primary.main,
@@ -23,13 +26,13 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const RoundedButton = ({children,color,size,...props}) => {
+const RoundedButton = ({children,color,size,height,lineHeight,width,borderRadius,...props}) => {
 
     const classes = useStyles();
 
     return (
         <Box  style={{display: 'inline-block'}} {...props}>
-            <Box className={classes.roundedButton}  style={{color: color,fontSize: size}}>
+            <Box className={classes.roundedButton}  style={{lineHeight: lineHeight, color: color,borderRadius: borderRadius, fontSize: size,height: height,width:width}}>
                 {children}
             </Box>
         </Box>

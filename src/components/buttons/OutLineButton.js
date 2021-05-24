@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const OutLineButton = ({children,size,color,bottomLineColor,...props}) => {
+const OutLineButton = ({children,size,weight,color,bottomLineColor,lineHeight,...props}) => {
 
     const classes = useStyles();
 
@@ -82,7 +82,7 @@ const OutLineButton = ({children,size,color,bottomLineColor,...props}) => {
         <motion.div onMouseEnter={classVisibleHandler}
                      onMouseLeave={classHiddenHandler}
                      className={classes.outLineButton}
-                     style={{fontSize: size,color: color}}
+                     style={{fontSize: size,color: color,lineHeight: lineHeight,fontWeight: weight}}
         >
             {children}
         <AnimatePresence>
