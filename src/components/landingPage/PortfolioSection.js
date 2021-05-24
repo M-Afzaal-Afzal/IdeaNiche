@@ -40,6 +40,10 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            justifyContent: 'center',
+        }
     },
     portfolioItem: {
 
@@ -51,6 +55,11 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'start',
+
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            justifyContent: 'center',
+        }
     },
     portfolioItemTitle: {
         fontSize: '1.5rem',
@@ -69,15 +78,28 @@ const useStyles = makeStyles(theme => ({
             width: '100%',
             height: 'auto',
         }
+    },
+    moreProjectsContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: '80px',
     }
 }))
 
 const imageAnimateVariants = {
+    initial: {
+        scale: 1,
+        transition: {
+            type: 'tween',
+            ease: 'easeInOut',
+            duration: .5,
+        }
+    },
     hover: {
         scale: 1.02,
         transition: {
             type: 'linear',
-            ease: 'easeOut',
+            ease: 'easeInOut',
         }
     }
 }
@@ -102,7 +124,7 @@ const PortfolioSection = () => {
 
 
                     <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
+                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
                             <img src={'https://img.orangesoft.co/media/warehousing-app.png'} alt={'portfolio item'}/>
                         </Box>
                         <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
@@ -112,7 +134,7 @@ const PortfolioSection = () => {
 
 
                     <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
+                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
                             <img src={'https://img.orangesoft.co/media/recipies-app.png'} alt={'portfolio item'} />
                         </Box>
                         <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
@@ -122,7 +144,7 @@ const PortfolioSection = () => {
 
 
                     <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
+                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
                             <img src={'https://img.orangesoft.co/media/freshconnect-ios-app.png'} alt={'portfolio item'} />
                         </Box>
                         <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
@@ -132,7 +154,7 @@ const PortfolioSection = () => {
 
 
                     <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} variants={imageAnimateVariants} whileHover={'hover'} className={classes.imageContainer}>
+                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'} className={classes.imageContainer}>
                             <img src={'https://img.orangesoft.co/media/ghost-hunt-app.png'} alt={'portfolio item'} />
                         </Box>
                         <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
@@ -141,6 +163,12 @@ const PortfolioSection = () => {
                     </Box>
 
 
+                </Box>
+
+                <Box className={classes.moreProjectsContainer}>
+                    <OutLineButton size={'18.4px'} color={'white'} bottomLineColor={'white'}>
+                        More Projects
+                    </OutLineButton>
                 </Box>
 
             </Container>

@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: '80px',
         marginLeft: '-80px',
         position: 'relative',
+        [theme.breakpoints.down('sm')] : {
+            marginLeft: '0',
+        }
     },
 
 }))

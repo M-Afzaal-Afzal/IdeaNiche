@@ -7,7 +7,7 @@ import {Provider} from 'react-redux'
 import store from "../src/store/store";
 import Layout from "../src/components/Layout/Layout";
 import theme from "../src/theme/LightTheme";
-
+import "swiper/swiper.min.css";
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;

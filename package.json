@@ -14,7 +14,8 @@
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
     "react-typed": "^1.2.0",
-    "react-useanimations": "^2.0.6"
+    "react-useanimations": "^2.0.6",
+    "swiper": "^6.6.2"
   },
   "scripts": {
     "dev": "next",
