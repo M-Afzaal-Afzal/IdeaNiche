@@ -97,8 +97,8 @@ const useStyles = makeStyles(theme => ({
     },
     link: {
         display: 'flex',
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         textDecoration: 'none !important'
     }
 
@@ -182,19 +182,20 @@ const Header = (props) => {
                         <Box className={`${classes.grow} ${classes.rightIconsContainer}`}>
                             <Hidden smDown>
 
-                                <OutLineButton className={classes.btn}
-                                               to={'contact'} smooth={'true'}
-                                               size={'small'}
-                                >
-                                    Services
-                                </OutLineButton>
+                                <Box className={classes.link} component={Link} href={'/services'}>
+                                    <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                                   size={'small'}
+                                    >
+                                        Services
+                                    </OutLineButton>
+                                </Box>
 
                                 <Box className={classes.link} component={Link} href={'/about'}>
-                                        <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
-                                                       size={'small'}
-                                        >
-                                            About
-                                        </OutLineButton>
+                                    <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                                   size={'small'}
+                                    >
+                                        About
+                                    </OutLineButton>
                                 </Box>
 
                                 <OutLineButton className={classes.btn}
@@ -274,22 +275,27 @@ const Header = (props) => {
                             exit={'exit'}
                             className={classes.drawer}>
                             <Box className={classes.drawerButtonsContainer}>
-                                <OutLineButton
-                                    className={classes.drawerButton}
-                                    size={'24px'}
-                                    color={theme.palette.primary.main}
-                                >
-                                    Services
-                                </OutLineButton>
+                                <Box component={Link} href={'/services'}>
+                                    <Box onClick={closeDrawer}>
+                                        <OutLineButton
+                                            className={classes.drawerButton}
+                                            size={'24px'}
+                                            color={theme.palette.primary.main}
+                                        >
+                                            Services
+                                        </OutLineButton>
+                                    </Box>
+                                </Box>
+
                                 <Box component={Link} href={'/about'}>
                                     <Box onClick={closeDrawer}>
-                                <OutLineButton
-                                    className={classes.drawerButton}
-                                    size={'24px'}
-                                    color={theme.palette.primary.main}
-                                >
-                                    About
-                                </OutLineButton>
+                                        <OutLineButton
+                                            className={classes.drawerButton}
+                                            size={'24px'}
+                                            color={theme.palette.primary.main}
+                                        >
+                                            About
+                                        </OutLineButton>
                                     </Box>
                                 </Box>
 
