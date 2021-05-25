@@ -162,7 +162,6 @@ const PortfolioSection = () => {
                         </OutLineButton>
                     </Box>
 
-
                 </Box>
 
                 <Box className={classes.moreProjectsContainer}>
