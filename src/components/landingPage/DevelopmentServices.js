@@ -61,7 +61,9 @@ const useStyles = makeStyles(theme => ({
         fontSize: '24px',
         fontWeight: '300px',
         lineHeight: '1.35',
-        padding: '6px 18px 6px 0',
+        padding: '10px 18px 10px 0',
+        display: 'flex',
+        alignItems: 'center',
     },
     titleWithLineContainer: {
         display: 'flex',
@@ -113,29 +115,27 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-const DevelopmentServices = () => {
+const DevelopmentServices = ({heading,services,bottomTech}) => {
 
     const theme = useTheme();
     const classes = useStyles();
-
-    const services = ['iOS Development', 'Android Development', 'Web App Development', 'UI/UX Design', 'Quality Assurance', 'Tech Consulting'];
 
     return (
         <div className={classes.pageContainer}>
             <Container disableGutters maxWidth={'lg'}>
                 <Box className={classes.servicesBlock}>
                     <Typography variant={'h3'} className={classes.servicesBlockTitle}>
-                        Full cycle of development services
+                        {heading}
                     </Typography>
                     <Box className={classes.servicesBlockList}>
                         {
                             services.map(service => (
                                 <Box className={classes.service}>
                                     <OutLineButton size={24}>
-                                        {service}
+                                        {service.heading}
                                     </OutLineButton>
                                     <RiArrowRightSLine
-                                        style={{display: "inline-block", marginBottom: '4px', marginLeft: '10px'}}
+                                        style={{display: "inline-block", width: '20px',height: '20px', marginBottom: '4px', marginLeft: '10px'}}
                                         size={20} color={theme.palette.primary.main}/>
                                 </Box>
                             ))
@@ -145,95 +145,101 @@ const DevelopmentServices = () => {
 
                 {/*    title with line*/}
 
+                {
+                    bottomTech && (
+                        <>
+                            <Box className={classes.titleWithLineContainer}>
+                                <HeadingWithDash className={classes.headingWithDash} style={{marginLeft: 'auto'}}>
+                                    We excel at quality app development
+                                </HeadingWithDash>
+                            </Box>
 
-                <Box className={classes.titleWithLineContainer}>
-                    <HeadingWithDash className={classes.headingWithDash} style={{marginLeft: 'auto'}}>
-                        We excel at quality app development
-                    </HeadingWithDash>
-                </Box>
+                            <Box className={classes.mainTechnologies}>
 
-                <Box className={classes.mainTechnologies}>
-
-                    <Box className={classes.technologyBox}>
-                        <Typography className={classes.techBoxHeading} variant={'h3'}>
-                            Web technologies
-                        </Typography>
-                        <span className={classes.techName}>
+                                <Box className={classes.technologyBox}>
+                                    <Typography className={classes.techBoxHeading} variant={'h3'}>
+                                        Web technologies
+                                    </Typography>
+                                    <span className={classes.techName}>
                             PHP &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
 
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Javascript &nbsp; <span style={{color: theme.palette.primary.main}}>/ &nbsp;</span>
                         </span>
 
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Node.JS &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Express &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             React &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Symfony &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            Laravel &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Redis &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            MongoDB &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             PostgreSQL &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             MySql &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                    </Box>
+                                </Box>
 
-                    <Box className={`${classes.technologyBox} ${classes.mainTechnologyBoxRight}`}>
-                        <Typography className={classes.techBoxHeading} variant={'h3'}>
-                            Mobile technologies
-                        </Typography>
-                        <span className={classes.techName}>
+                                <Box className={`${classes.technologyBox} ${classes.mainTechnologyBoxRight}`}>
+                                    <Typography className={classes.techBoxHeading} variant={'h3'}>
+                                        Mobile technologies
+                                    </Typography>
+                                    <span className={classes.techName}>
                             Swift &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Java &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Kotlin &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                             Objective-C &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            RxJava &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            Alamofire &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            RxSwift &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            Firebase &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            SQLite &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            Realm &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                        <span className={classes.techName}>
+                                    <span className={classes.techName}>
                            CoreData &nbsp; <span style={{color: theme.palette.primary.main}}>/&nbsp;</span>
                         </span>
-                    </Box>
-                </Box>
+                                </Box>
+                            </Box>
+                        </>
+                    )
+                }
+
 
             </Container>
         </div>
