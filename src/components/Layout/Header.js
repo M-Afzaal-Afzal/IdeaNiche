@@ -94,6 +94,12 @@ const useStyles = makeStyles(theme => ({
     },
     boxShadow: {
         boxShadow: "rgb(196 196 196 / 22%) 0px 24px 24px",
+    },
+    link: {
+        display: 'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        textDecoration: 'none !important'
     }
 
 }))
@@ -183,21 +189,21 @@ const Header = (props) => {
                                     Services
                                 </OutLineButton>
 
+                                <Box className={classes.link} component={Link} href={'/about'}>
+                                        <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                                       size={'small'}
+                                        >
+                                            About
+                                        </OutLineButton>
+                                </Box>
 
-                                <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
-                                               size={'small'}
-                                >
-                                    About
-                                </OutLineButton>
-
-                                <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                <OutLineButton className={classes.btn}
                                                size={'small'}
                                 >
                                     Work
                                 </OutLineButton>
 
-                                <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
-                                               size={'small'}
+                                <OutLineButton className={classes.btn} size={'small'}
                                 >
                                     Blog
                                 </OutLineButton>
@@ -275,7 +281,8 @@ const Header = (props) => {
                                 >
                                     Services
                                 </OutLineButton>
-
+                                <Box component={Link} href={'/about'}>
+                                    <Box onClick={closeDrawer}>
                                 <OutLineButton
                                     className={classes.drawerButton}
                                     size={'24px'}
@@ -283,6 +290,8 @@ const Header = (props) => {
                                 >
                                     About
                                 </OutLineButton>
+                                    </Box>
+                                </Box>
 
                                 <OutLineButton
                                     className={classes.drawerButton}

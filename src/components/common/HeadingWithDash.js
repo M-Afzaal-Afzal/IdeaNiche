@@ -25,12 +25,12 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-const HeadingWithDash = ({children,size,color,weight,className,...props}) => {
+const HeadingWithDash = ({children,size,color,weight,marginLeft,className,...props}) => {
 
     const classes = useStyles();
 
     return (
-        <Typography className={`${classes.heading} ${className}`} {...props} variant={'h2'} style={{fontSize: size,color: color,fontWeight: weight,}}>
+        <Typography className={`${classes.heading} ${className}`} {...props} variant={'h2'} style={{marginLeft: marginLeft, fontSize: size,color: color,fontWeight: weight,}}>
             <Box className={classes.line}/>
             {children}
         </Typography>
