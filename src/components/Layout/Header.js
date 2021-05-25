@@ -198,11 +198,13 @@ const Header = (props) => {
                                     </OutLineButton>
                                 </Box>
 
-                                <OutLineButton className={classes.btn}
-                                               size={'small'}
-                                >
-                                    Work
-                                </OutLineButton>
+                                <Box className={classes.link} component={Link} href={'/works'}>
+                                    <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                                   size={'small'}
+                                    >
+                                        Works
+                                    </OutLineButton>
+                                </Box>
 
                                 <OutLineButton className={classes.btn} size={'small'}
                                 >
@@ -299,13 +301,17 @@ const Header = (props) => {
                                     </Box>
                                 </Box>
 
-                                <OutLineButton
-                                    className={classes.drawerButton}
-                                    size={'24px'}
-                                    color={theme.palette.primary.main}
-                                >
-                                    Work
-                                </OutLineButton>
+                                <Box component={Link} href={'/works'}>
+                                    <Box onClick={closeDrawer}>
+                                        <OutLineButton
+                                            className={classes.drawerButton}
+                                            size={'24px'}
+                                            color={theme.palette.primary.main}
+                                        >
+                                           Works
+                                        </OutLineButton>
+                                    </Box>
+                                </Box>
 
                                 <OutLineButton
                                     className={classes.drawerButton}
