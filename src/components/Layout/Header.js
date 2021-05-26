@@ -243,15 +243,6 @@ const Header = (props) => {
                                         )
                                     }
 
-                                    {/*    <UseAnimations*/}
-                                    {/*        animation={menu4}*/}
-                                    {/*        animationKey="menu4"*/}
-                                    {/*        onClick={toggleDrawer}*/}
-                                    {/*        size={35}*/}
-                                    {/*        reverse={isDrawerOpen}*/}
-                                    {/*        style={{padding: 100}}*/}
-                                    {/*    />*/}
-
                                 </div>
                                 {/*</IconButton>*/}
                             </Hidden>

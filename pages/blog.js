@@ -1,8 +1,25 @@
 import React from 'react';
-import { Box, Container, makeStyles, Tab, Tabs, Typography} from "@material-ui/core";
+import {Box, Container, Hidden, makeStyles, Tab, Tabs, Typography, useTheme} from "@material-ui/core";
+import Image from 'next/image';
+import Pagination from '@material-ui/lab/Pagination';
 
 import {client} from "../prismic-configuration";
 import Prismic from "prismic-javascript";
+import OutLineButton from "../src/components/buttons/OutLineButton";
+import {motion} from "framer-motion";
+
+
+const imageVariants = {
+    hidden: {
+        scale: 1
+    },
+    visible: {
+        scale: 1.1
+    },
+    hover: {
+        scale: 1.1
+    }
+}
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -47,43 +64,476 @@ const useStyles = makeStyles(theme => ({
             top: '50px',
         }
     },
+    tabPanel: {
+        paddingTop: '80px',
+        paddingBottom: "80px",
+    },
+    tabsContainerInner: {
+        display: 'flex',
+        flexDirection: "row",
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    subscribeBuutton: {
+        marginTop: '1rem',
+    },
+    blogList: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    article: {
+        width: '32%',
+        padding: '1.5rem 0',
+        overflow: 'hidden',
+        '&:nth-child(3n-1)': {
+            margin: '0 2%',
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '49%',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+        }
+    },
+    imageContainer: {
+        width: '100%',
+        height: '160px',
+        position: 'relative',
+        overflow: 'hidden',
+        '& img:hover': {
+            scale: 1.1,
+        }
+    },
+    articleInfo: {
+        color: '#000',
+        opacity: 1,
+        marginTop: '1rem',
+        transition: 'opacity .3s',
+    },
+    articleInfoTitle: {
+        fontWeight: '400',
+        fontSize: '18px',
+        marginBottom: '15px',
+    },
+    articleInfoDesc: {
+        fontSize: "14px",
+    },
+    articleMeta: {
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: '12px',
+        color: '#8a9399',
+        marginTop: '.75rem',
+    },
+    clock: {
+        width: '17px',
+        height: '17px',
+        margin: '0 4px',
+    },
+    paginationContainer: {
+        display: "flex",
+        justifyContent: 'flex-end',
+        marginTop:'1rem',
+    }
 }))
 
 
 const Blog = ({blogs}) => {
 
     const classes = useStyles();
+    const theme = useTheme();
 
     const [value, setValue] = React.useState(0);
+    // const [opacity,setOpacity] = React.useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const opacityHandler = (opacity) => {
+        setOpacity(opacity);
+    }
 
     console.log(blogs)
 
     return (
         <Box>
             <Box className={classes.tabsContainer}>
-                <Container maxWidth={'lg'} disableGutters>
-                    <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                <Container maxWidth={'lg'} className={classes.tabsContainerInner}>
+                    <Tabs color={'primary'} value={value} onChange={handleChange} aria-label="simple tabs example">
                         <Tab label="Item One" {...a11yProps(0)} />
                         <Tab label="Item Two" {...a11yProps(1)} />
                         <Tab label="Item Three" {...a11yProps(2)} />
                     </Tabs>
+
+                    <Hidden smDown>
+                        <Box className={classes.subscribeBuutton}>
+                            <OutLineButton color={theme.palette.primary.main}>
+                                Subscribe
+                            </OutLineButton>
+                        </Box>
+                    </Hidden>
+
                 </Container>
             </Box>
 
             <Container maxWidth={'lg'}>
-                <TabPanel value={value} index={0}>
-                    Item One
+
+
+                <TabPanel className={classes.tabPanel} value={value} index={0}>
+
+
+                    <Box className={classes.blogList}>
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                                <Box className={classes.articleInfo}>
+                                    <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                        9 Tips on How to Choose the Best App Development Company
+                                    </Typography>
+
+                                    <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                        If you need to hire an app developer, know that there are mistakes you should
+                                        try to avoid. Here are top 9 tips for choosing the best app development company.
+                                    </Typography>
+
+                                    <Box className={classes.articleMeta}>
+                                        <span>Client Guides · 14 May 2021 ·</span>
+                                        <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                        <span> 6 min</span>
+                                    </Box>
+
+                                </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+
+                        <Box className={classes.article}
+                             component={motion.div}
+                             whileHover={{opacity: '.7'}}
+                        >
+                            <Box style={{overflow: 'hidden'}}>
+
+                                <Box variants={imageVariants}
+                                     component={motion.div}
+                                     whileHover={'hover'}
+                                     initial={'hidden'} className={classes.imageContainer}>
+                                    <Image
+                                        // animate={'visible'}
+                                        src={'https://img.orangesoft.co/media/how-to-choose-the-best-app-developer-2.jpg'}
+                                        layout={'fill'} objectFit={'cover'}/>
+                                </Box>
+                            </Box>
+                            <Box className={classes.articleInfo}>
+                                <Typography variant={'h3'} className={classes.articleInfoTitle}>
+                                    9 Tips on How to Choose the Best App Development Company
+                                </Typography>
+
+                                <Typography variant={'body1'} className={classes.articleInfoDesc}>
+                                    If you need to hire an app developer, know that there are mistakes you should
+                                    try to avoid. Here are top 9 tips for choosing the best app development company.
+                                </Typography>
+
+                                <Box className={classes.articleMeta}>
+                                    <span>Client Guides · 14 May 2021 ·</span>
+                                    <img className={classes.clock} src={'https://orangesoft.co/svg/clock.svg'} alt="time"/>
+                                    <span> 6 min</span>
+                                </Box>
+
+                            </Box>
+
+
+                        </Box>
+                    </Box>
+
+                    <Box className={classes.paginationContainer}>
+                        <Pagination color={'primary'} count={3} />
+                    </Box>
+
+
                 </TabPanel>
-                <TabPanel value={value} index={1}>
+
+
+                <TabPanel className={classes.tabPanel} value={value} index={1}>
                     Item Two
                 </TabPanel>
-                <TabPanel value={value} index={2}>
+                <TabPanel className={classes.tabPanel} value={value} index={2}>
                     Item Three
                 </TabPanel>
+
+
             </Container>
         </Box>
     );
