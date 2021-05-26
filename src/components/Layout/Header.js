@@ -19,6 +19,7 @@ import RoundedButton from "../buttons/RoundedButton";
 import {FaFacebookF, FaLinkedinIn, FaInstagram, FaDribbble, FaBehance} from "react-icons/fa";
 import {HiOutlineMenuAlt3} from "react-icons/hi";
 import {AnimatePresence, motion} from "framer-motion";
+import {useRouter} from "next/router";
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -131,19 +132,12 @@ const Header = (props) => {
     const classes = useStyles();
 
     const theme = useTheme();
-    // const isDarkMode = useSelector(selectIsDarkMode);
+
+    const {pathname} = useRouter();
+
+    console.log(pathname)
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-    // const dispatch = useDispatch();
-    //
-    // const darkModeHandler = () => {
-    //     dispatch(toggleDarkMode());
-    // }
-
-    // const toggleDrawer = () => {
-    //     setIsDrawerOpen(!isDrawerOpen);
-    // }
 
     const closeDrawer = () => {
         setIsDrawerOpen(false)
@@ -157,7 +151,7 @@ const Header = (props) => {
 
         <Box>
 
-            <AppBar color={'white'} elevation={0} className={!isDrawerOpen ? classes.boxShadow : ' '}
+            <AppBar style={{boxShadow: pathname === '/blog' ? 'none': ''}} color={'white'} elevation={0} className={!isDrawerOpen ? classes.boxShadow : ' '}
                     position={'fixed'}>
                 <Container maxWidth={'lg'} style={{position: 'relative'}}>
                     <Toolbar color={'gray'} disableGutters>
@@ -183,7 +177,7 @@ const Header = (props) => {
                             <Hidden smDown>
 
                                 <Box className={classes.link} component={Link} href={'/services'}>
-                                    <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                    <OutLineButton active={pathname === '/services'} className={classes.btn} to={'contact'} smooth={'true'}
                                                    size={'small'}
                                     >
                                         Services
@@ -191,7 +185,7 @@ const Header = (props) => {
                                 </Box>
 
                                 <Box className={classes.link} component={Link} href={'/about'}>
-                                    <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                    <OutLineButton active={pathname === '/about'} className={classes.btn} to={'contact'} smooth={'true'}
                                                    size={'small'}
                                     >
                                         About
@@ -199,17 +193,20 @@ const Header = (props) => {
                                 </Box>
 
                                 <Box className={classes.link} component={Link} href={'/works'}>
-                                    <OutLineButton className={classes.btn} to={'contact'} smooth={'true'}
+                                    <OutLineButton active={pathname === '/works'} className={classes.btn} to={'contact'} smooth={'true'}
                                                    size={'small'}
                                     >
                                         Works
                                     </OutLineButton>
                                 </Box>
 
-                                <OutLineButton className={classes.btn} size={'small'}
-                                >
-                                    Blog
-                                </OutLineButton>
+                                <Box className={classes.link} component={Link} href={'/blog'}>
+                                    <OutLineButton active={pathname === '/blog'} className={classes.btn} to={'contact'} smooth={'true'}
+                                                   size={'small'}
+                                    >
+                                        Blog
+                                    </OutLineButton>
+                                </Box>
 
                                 <Box component={Link} href={'/contact'}>
                                     <Box>
@@ -280,6 +277,7 @@ const Header = (props) => {
                                 <Box component={Link} href={'/services'}>
                                     <Box onClick={closeDrawer}>
                                         <OutLineButton
+                                            active={pathname === '/services'}
                                             className={classes.drawerButton}
                                             size={'24px'}
                                             color={theme.palette.primary.main}
@@ -292,6 +290,8 @@ const Header = (props) => {
                                 <Box component={Link} href={'/about'}>
                                     <Box onClick={closeDrawer}>
                                         <OutLineButton
+                                            active={pathname === '/about'}
+
                                             className={classes.drawerButton}
                                             size={'24px'}
                                             color={theme.palette.primary.main}
@@ -304,6 +304,7 @@ const Header = (props) => {
                                 <Box component={Link} href={'/works'}>
                                     <Box onClick={closeDrawer}>
                                         <OutLineButton
+                                            active={pathname === '/works'}
                                             className={classes.drawerButton}
                                             size={'24px'}
                                             color={theme.palette.primary.main}
@@ -313,13 +314,19 @@ const Header = (props) => {
                                     </Box>
                                 </Box>
 
-                                <OutLineButton
-                                    className={classes.drawerButton}
-                                    size={'24px'}
-                                    color={theme.palette.primary.main}
-                                >
-                                    Blog
-                                </OutLineButton>
+                                <Box component={Link} href={'/blog'}>
+                                    <Box onClick={closeDrawer}>
+                                        <OutLineButton
+                                            active={pathname === '/blog'}
+
+                                            className={classes.drawerButton}
+                                            size={'24px'}
+                                            color={theme.palette.primary.main}
+                                        >
+                                            Blog
+                                        </OutLineButton>
+                                    </Box>
+                                </Box>
 
                                 <Box component={Link} href={'/contact'}>
                                     <Box onClick={closeDrawer}>

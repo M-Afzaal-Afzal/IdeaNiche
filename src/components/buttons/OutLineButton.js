@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const OutLineButton = ({children,size,weight,color,bottomLineColor,lineHeight,...props}) => {
+const OutLineButton = ({active, children,size,weight,color,bottomLineColor,lineHeight,...props}) => {
 
     const classes = useStyles();
 
@@ -89,9 +89,8 @@ const OutLineButton = ({children,size,weight,color,bottomLineColor,lineHeight,..
             <motion.div
                 style={{background: bottomLineColor}}
                  variants={bottomLineVariants}
-                 initial={'hidden'}
                  exit={'exit'}
-                 animate={lineClassName}
+                 animate={active ? 'visible' : lineClassName}
                  className={classes.bottomLine}
             />
         </AnimatePresence>
