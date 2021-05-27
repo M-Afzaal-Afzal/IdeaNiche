@@ -4,6 +4,8 @@ import HeadingWithDash from "../common/HeadingWithDash";
 import OutLineButton from "../buttons/OutLineButton";
 import {motion} from "framer-motion";
 
+import Link from 'next/link';
+
 const useStyles = makeStyles(theme => ({
     portfolioBlock: {
         color: 'white',
@@ -73,7 +75,7 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
         display: 'flex',
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         '& img': {
             width: '100%',
             height: 'auto',
@@ -104,70 +106,55 @@ const imageAnimateVariants = {
     }
 }
 
-const PortfolioSection = () => {
+const PortfolioSection = ({works}) => {
 
     const classes = useStyles();
+
+    console.log(works);
+
+    if (!works) {
+        return (<Box>Loading</Box>)
+    }
 
     return (
         <Box className={`${classes.portfolioBlock} ${classes.pageContainer}`}>
             <Container maxWidth={'lg'}>
                 <Box>
-                   <HeadingWithDash>
-                       Portfolio
-                   </HeadingWithDash>
+                    <HeadingWithDash>
+                        Portfolio
+                    </HeadingWithDash>
                 </Box>
                 <Box className={classes.portfolioHeadingBlock}>
                     Take a look at some of the apps we’ve developed since 2011
                 </Box>
 
                 <Box className={classes.portfolioBlockContent}>
+                    {
+                        works.results.slice(0,4).map(work => (
+                            <Box component={Link} href={`/works/${work.uid}`}>
+                                <Box className={`${classes.portfolioItem}`}>
+                                    <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants}
+                                         whileHover={'hover'} className={classes.imageContainer}>
+                                        <img src={work.data.featured_image.url} alt={'portfolio item'}/>
+                                    </Box>
+                                    <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'}
+                                                   className={classes.portfolioItemTitle}>
+                                        {work.data.heading[0].text}
+                                    </OutLineButton>
+                                </Box>
+                            </Box>
+                        ))
+                    }
 
-
-                    <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
-                            <img src={'https://img.orangesoft.co/media/warehousing-app.png'} alt={'portfolio item'}/>
-                        </Box>
-                        <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
-                            WearHouse
-                        </OutLineButton>
-                    </Box>
-
-
-                    <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
-                            <img src={'https://img.orangesoft.co/media/recipies-app.png'} alt={'portfolio item'} />
-                        </Box>
-                        <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
-                            WearHouse
-                        </OutLineButton>
-                    </Box>
-
-
-                    <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'}  className={classes.imageContainer}>
-                            <img src={'https://img.orangesoft.co/media/freshconnect-ios-app.png'} alt={'portfolio item'} />
-                        </Box>
-                        <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
-                            Fresh Content
-                        </OutLineButton>
-                    </Box>
-
-
-                    <Box className={`${classes.portfolioItem}`}>
-                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants} whileHover={'hover'} className={classes.imageContainer}>
-                            <img src={'https://img.orangesoft.co/media/ghost-hunt-app.png'} alt={'portfolio item'} />
-                        </Box>
-                        <OutLineButton bottomLineColor={'white'} color={'white'} size={'24px'} className={classes.portfolioItemTitle}>
-                            Ghost Hunt
-                        </OutLineButton>
-                    </Box>
 
                 </Box>
 
-                <Box className={classes.moreProjectsContainer}>
-                    <OutLineButton size={'18.4px'} color={'white'} bottomLineColor={'white'}>
-                        More Projects
-                    </OutLineButton>
+                <Box  className={classes.moreProjectsContainer}>
+                    <Box component={Link} href={'/works'}>
+                        <OutLineButton size={'18.4px'} color={'white'} bottomLineColor={'white'}>
+                            More Projects
+                        </OutLineButton>
+                    </Box>
                 </Box>
 
             </Container>

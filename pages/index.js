@@ -7,8 +7,10 @@ import PortfolioSection from "../src/components/landingPage/PortfolioSection";
 import Testimonials from "../src/components/landingPage/Testimonials";
 import AwwardsSection from "../src/components/landingPage/AwwardsSection";
 import ContactusSection from "../src/components/landingPage/ContactusSection";
+import {client} from "../prismic-configuration";
+import Prismic from "prismic-javascript";
 
-export default function Index() {
+const Index = ({works}) => {
     return (
         <Box>
             <HeroSection/>
@@ -45,10 +47,27 @@ export default function Index() {
                     ]
                 }
             />
-            <PortfolioSection/>
+            <PortfolioSection works={works}/>
             <Testimonials/>
             <AwwardsSection/>
             <ContactusSection/>
         </Box>
     );
 }
+
+export async function getStaticProps(context) {
+    const works = await client().query(
+        Prismic.Predicates.at('document.type', 'work')
+    )
+
+    console.log(works);
+
+    return {
+        props: {
+            works
+        },
+        revalidate: 10,
+    }
+}
+
+export default Index;

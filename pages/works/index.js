@@ -1,8 +1,11 @@
 import React from 'react';
 import {Box, Container, makeStyles, Typography} from "@material-ui/core";
-import HeadingWithDash from "../src/components/common/HeadingWithDash";
+import HeadingWithDash from "../../src/components/common/HeadingWithDash";
 import {motion} from "framer-motion";
-import OutLineButton from "../src/components/buttons/OutLineButton";
+import OutLineButton from "../../src/components/buttons/OutLineButton";
+import {client} from "../../prismic-configuration";
+import Prismic from "prismic-javascript";
+import Link from 'next/link'
 
 const useStyles = makeStyles(theme => ({
     portfolioBlock: {
@@ -141,9 +144,11 @@ const imageAnimateVariants = {
     }
 }
 
-const Works = () => {
+const Works = ({works}) => {
 
     const classes = useStyles();
+
+    console.log(works.results[0].data)
 
     return (
         <Box>
@@ -160,64 +165,25 @@ const Works = () => {
 
                     <Box className={classes.portfolioBlockContent}>
 
-
-                        <Box className={`${classes.portfolioItem}`}>
-                            <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants}
-                                 whileHover={'hover'} className={classes.imageContainer}>
-                                <img src={'https://img.orangesoft.co/media/warehousing-app.png'}
-                                     alt={'portfolio item'}/>
-                            </Box>
-                            <OutLineButton size={'24px'} className={classes.portfolioItemTitle}>
-                                WearHouse
-                            </OutLineButton>
-                            <Typography variant={'h3'} className={classes.portfolioItemCategories}>
-                                UI/UX, WEB, IOS
-                            </Typography>
-                        </Box>
-
-
-                        <Box className={`${classes.portfolioItem}`}>
-                            <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants}
-                                 whileHover={'hover'} className={classes.imageContainer}>
-                                <img src={'https://img.orangesoft.co/media/recipies-app.png'} alt={'portfolio item'}/>
-                            </Box>
-                            <OutLineButton size={'24px'} className={classes.portfolioItemTitle}>
-                                WearHouse
-                            </OutLineButton>
-                            <Typography variant={'h3'} className={classes.portfolioItemCategories}>
-                                IOS, UI/UX, WEB, ANDROID
-                            </Typography>
-                        </Box>
-
-
-                        <Box className={`${classes.portfolioItem}`}>
-                            <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants}
-                                 whileHover={'hover'} className={classes.imageContainer}>
-                                <img src={'https://img.orangesoft.co/media/freshconnect-ios-app.png'}
-                                     alt={'portfolio item'}/>
-                            </Box>
-                            <OutLineButton size={'24px'} className={classes.portfolioItemTitle}>
-                                Fresh Content
-                            </OutLineButton>
-
-                            <Typography variant={'h3'} className={classes.portfolioItemCategories}>
-                                ANDROID, IOS, UI/UX, WEB
-                            </Typography>
-                        </Box>
-
-
-                        <Box className={`${classes.portfolioItem}`}>
-                            <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants}
-                                 whileHover={'hover'} className={classes.imageContainer}>
-                                <img src={'https://img.orangesoft.co/media/ghost-hunt-app.png'} alt={'portfolio item'}/>
-                            </Box>
-                            <OutLineButton size={'24px'} className={classes.portfolioItemTitle}>
-                                Ghost Hunt
-                            </OutLineButton>
-                            <Typography variant={'h3'} className={classes.portfolioItemCategories}>
-                                IOS, ANDROID
-                            </Typography>
-                        </Box>
+                        {
+                            works.results.map(work => (
+                                <Box id={work.uid} component={Link} href={`/works/${work.uid}`}>
+                                    <Box  className={`${classes.portfolioItem}`}>
+                                        <Box component={motion.div} initial={'initial'} variants={imageAnimateVariants}
+                                             whileHover={'hover'} className={classes.imageContainer}>
+                                            <img src={work.data.featured_image.url}
+                                                 alt={'portfolio item'}/>
+                                        </Box>
+                                        <OutLineButton size={'24px'} className={classes.portfolioItemTitle}>
+                                            {work.data.heading[0].text}
+                                        </OutLineButton>
+                                        <Typography variant={'h3'} className={classes.portfolioItemCategories}>
+                                            {work.data.technologies_used[0].text}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            ))
+                        }
 
                     </Box>
 
@@ -284,5 +250,20 @@ const Works = () => {
         </Box>
     );
 };
+
+export async function getStaticProps(context) {
+    const works = await client().query(
+        Prismic.Predicates.at('document.type', 'work')
+    )
+
+    console.log(works);
+
+    return {
+        props: {
+            works
+        },
+        revalidate: 10,
+    }
+}
 
 export default Works;
